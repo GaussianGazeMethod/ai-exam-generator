@@ -1,0 +1,20 @@
+# 从原项目运行环境核对的直接依赖版本。
+# Python 3.10；测试依赖见 requirements-dev.txt。
+agently==4.1.3.8
+fastapi==0.137.1
+uvicorn[standard]==0.49.0
+sqlalchemy[asyncio]==2.0.51
+aiosqlite==0.22.1
+pydantic==2.13.4
+pydantic-settings==2.14.1
+python-jose[cryptography]==3.5.0
+python-dotenv==1.2.2
+python-multipart==0.0.32
+aiofiles==23.2.1
+python-docx==1.2.0
+PyMuPDF==1.28.2
+httpx==0.28.1
+chromadb==1.5.9
+qrcode[pil]==8.2
+openpyxl==3.1.5
+reportlab==5.0.0

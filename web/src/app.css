@@ -1,0 +1,637 @@
+/* ==========================================================================
+   制度传达中心 · 设计系统（对齐 UIdesign/ai-exam-ui-方案.html 评审稿）
+   --------------------------------------------------------------------------
+   评审稿的视觉主线：深海军蓝侧栏承载角色与导航、蓝色作为主要行动色、
+   青色表达完成/合规、琥珀色表达提醒、红色只用于弃用与错误。
+   本文件是该评审稿在真实前端里唯一的设计令牌来源，页面不得再自造色值。
+   ========================================================================== */
+
+:root {
+  /* 评审稿色板 */
+  --navy: #12253f;
+  --navy-2: #1d3555;
+  --navy-active: #2a4770;
+  --blue: #2f6bff;
+  --cyan: #13b8a6;
+  --green: #24a477;
+  --green-deep: #198d6e;
+  --amber: #e8a63d;
+  --amber-deep: #a26a10;
+  --red: #e15d65;
+  --red-deep: #c44b58;
+  --purple: #7658d6;
+
+  /* 中性面 */
+  --ink: #17243a;
+  --ink-2: #4b607c;
+  --ink-3: #718096;
+  --muted: #8b9aae;
+  --muted-2: #a0adbb;
+  --line: #e6ebf2;
+  --line-soft: #edf0f5;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+
+  /* 浅底强调（标签 / 图标底） */
+  --blue-soft: #edf3ff;
+  --cyan-soft: #e8faf6;
+  --green-soft: #e7f8f2;
+  --amber-soft: #fff5df;
+  --red-soft: #fff1f2;
+  --purple-soft: #f1edff;
+
+  --shadow: 0 14px 36px rgba(27, 52, 86, 0.08);
+  --shadow-sm: 0 2px 8px rgba(27, 52, 86, 0.06);
+  --r: 16px;
+  --r-sm: 10px;
+  --side-w: 214px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 应用骨架 ─────────────────────────────────────────────────────────── */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--side-w) 1fr;
+  min-height: 100vh;
+}
+
+.app-side {
+  background: var(--navy);
+  color: #dce8fb;
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.app-side::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-side::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 99px;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 10px 22px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: #fff;
+}
+
+.app-brand-dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #53d9c4, #2f6bff);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 12px;
+  flex: none;
+}
+
+.app-brand small {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: #7f9ac0;
+  margin-top: 2px;
+}
+
+.app-side-group {
+  margin: 14px 0 6px;
+  padding: 0 10px;
+  color: #7f9ac0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 9px;
+  margin: 3px 0;
+  color: #abc0dd;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.app-nav:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.app-nav.active {
+  color: #fff;
+  background: var(--navy-active);
+  font-weight: 600;
+}
+
+.app-nav .ico {
+  opacity: 0.9;
+  font-size: 14px;
+  width: 17px;
+  text-align: center;
+}
+
+.app-nav .badge {
+  margin-left: auto;
+  color: #7ce3d1;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.app-user {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: auto;
+  padding: 16px 10px 4px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.app-user:hover b {
+  color: #fff;
+}
+
+.app-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  background: #d7e7ff;
+  color: #2a558f;
+  font-weight: 800;
+  flex: none;
+}
+
+.app-user b {
+  font-size: 12px;
+  display: block;
+  color: #dce8fb;
+}
+
+.app-user small {
+  font-size: 10px;
+  color: #91a9c9;
+}
+
+/* ── 主区 ─────────────────────────────────────────────────────────────── */
+
+.app-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 30px;
+  background: rgba(244, 247, 251, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.app-body {
+  padding: 22px 30px 34px;
+  min-width: 0;
+  flex: 1;
+}
+
+.eyebrow {
+  color: #8091a7;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--ink);
+}
+
+.app-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── 卡片 / KPI ───────────────────────────────────────────────────────── */
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel-head h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.kpi-grid {
+  display: grid;
+  gap: 13px;
+}
+
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--line-soft);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.kpi-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8091a7;
+  font-size: 11px;
+}
+
+.kpi-icon {
+  width: 27px;
+  height: 27px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.kpi-num {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 14px 0 4px;
+  letter-spacing: -1px;
+  color: var(--ink);
+}
+
+.kpi-num span {
+  font-size: 15px;
+}
+
+.trend {
+  font-size: 10px;
+  color: var(--green);
+}
+
+.trend span {
+  color: #91a0b3;
+  margin-left: 5px;
+}
+
+.trend.warn {
+  color: var(--amber-deep);
+}
+
+.trend.danger {
+  color: var(--red-deep);
+}
+
+/* ── 待办 / 动态 ──────────────────────────────────────────────────────── */
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #eef1f6;
+  border-radius: 11px;
+  padding: 13px 12px;
+  margin: 9px 0;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.task:hover {
+  border-color: #d7e2f5;
+  box-shadow: var(--shadow-sm);
+}
+
+.task-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: #3b72ea;
+  display: grid;
+  place-items: center;
+  flex: none;
+  font-size: 15px;
+}
+
+.task b {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.task small {
+  font-size: 10px;
+  color: #8190a3;
+}
+
+.task-action {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 13px 0;
+}
+
+.bar-row label {
+  width: 88px;
+  font-size: 11px;
+  color: #687991;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar {
+  height: 8px;
+  flex: 1;
+  background: #edf1f6;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--blue);
+}
+
+.bar-row strong {
+  width: 44px;
+  text-align: right;
+  font-size: 11px;
+}
+
+.activity {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 8px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f2f6;
+}
+
+.activity:last-child {
+  border: 0;
+}
+
+.activity .dot {
+  width: 8px;
+  height: 8px;
+  margin: 4px 0 0 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 0 4px var(--cyan-soft);
+}
+
+.activity b {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.activity small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.activity time {
+  font-size: 10px;
+  color: var(--muted-2);
+}
+
+/* ── 通用小组件 ───────────────────────────────────────────────────────── */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 99px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pill.green {
+  background: var(--green-soft);
+  color: var(--green-deep);
+}
+
+.pill.amber {
+  background: var(--amber-soft);
+  color: var(--amber-deep);
+}
+
+.pill.red {
+  background: var(--red-soft);
+  color: var(--red-deep);
+}
+
+.pill.gray {
+  background: #f1f4f7;
+  color: #728197;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 14px;
+}
+
+.grid-2.even {
+  grid-template-columns: 1fr 1fr;
+}
+
+.stack {
+  display: grid;
+  gap: 14px;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  height: 170px;
+  padding: 0 6px;
+}
+
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar-col i {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, #6ea1ff, #2f6bff);
+  min-height: 3px;
+}
+
+.bar-col small {
+  font-size: 10px;
+  color: #8796a8;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 13px 0;
+}
+
+.rank-name {
+  width: 104px;
+  font-size: 11px;
+  color: #5f7088;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 99px;
+  background: #eef1f6;
+}
+
+.rank-bar i {
+  height: 100%;
+  display: block;
+  border-radius: 99px;
+  background: var(--cyan);
+}
+
+.rank strong {
+  font-size: 11px;
+  width: 40px;
+  text-align: right;
+}
+
+/* ── 空态 / 加载 ──────────────────────────────────────────────────────── */
+
+.app-empty {
+  padding: 34px 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.app-skeleton {
+  padding: 8px 0;
+}
+
+/* ── 打印（导出 PDF 走浏览器打印） ───────────────────────────────────── */
+
+@media print {
+  .app-side,
+  .app-topbar,
+  .no-print {
+    display: none !important;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .app-body {
+    padding: 0;
+  }
+
+  .panel,
+  .kpi {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+}
+
+/* ── 窄屏兜底（管理端以 PC 为主，仅保证可用） ─────────────────────────── */
+
+@media (max-width: 1180px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
